@@ -6,6 +6,10 @@ public class Tokenizer{
     private String token;
     private String valor;
 
+    public Tokenizer(String lexema){
+        this.lexema = lexema;
+    }
+
     public Tokenizer(String lexema, String token, String valor) {
         this.lexema = lexema;
         this.token = token;
