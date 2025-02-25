@@ -3,6 +3,10 @@ package atividade.token;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.swing.JOptionPane;
 
 public class Main {
@@ -20,23 +24,12 @@ public class Main {
         
         System.out.println(codigo);
 
-        String codigo = """
-                int a = 134;
-                int b = 23;
-                if(b > 30)
-                    int c = b + a;
-                if(a > 100) {
-                    int c = a - b;
-                    char d = a * a + c;
-                }
-                """;
-
-        // Expressão regular para capturar tokens relevantes
+        //Expressão regular para capturar tokens
         String regex = "\\b(int|char|if)\\b|\\w+|[=+\\-*/;(){}]";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(codigo);
 
-        List<String> tokens = new ArrayList<>();
+        ArrayList<String> tokens = new ArrayList<String>();
 
         while (matcher.find()) {
             tokens.add(matcher.group());
