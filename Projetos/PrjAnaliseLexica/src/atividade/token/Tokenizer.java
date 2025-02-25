@@ -1,4 +1,7 @@
+package atividade.token;
+
 public class Tokenizer{
+
     private String lexema;
     private String token;
     private String valor;
