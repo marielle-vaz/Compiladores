@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import javax.swing.JOptionPane;
 
-public class Tokenizador {
+public class Main {
     
     public static void main(String[] args) {
 
