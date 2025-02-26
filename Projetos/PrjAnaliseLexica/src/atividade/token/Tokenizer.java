@@ -26,21 +26,3 @@ public class Tokenizer{
         return String.format("%-5d %-10s %-20s %-10s", id, lexema, token, valor);
     }
 }
-
-// public class Tokenizer {
-//     private final String lexema;
-//     private final String token;
-
-//     public Tokenizer(String lexema, String token) {
-//         this.lexema = lexema;
-//         this.token = token;
-//     }
-
-//     public String getLexema() {
-//         return lexema;
-//     }
-
-//     public String getToken() {
-//         return token;
-//     }
-// }
