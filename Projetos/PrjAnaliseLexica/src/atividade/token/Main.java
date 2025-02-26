@@ -38,8 +38,8 @@ public class Main {
 
         for (int i = 0; i < tokens.size(); i++) {
             String lexema = tokens.get(i);
-            String token = identificarToken(lexema);
-            String valor = (token.equals("NUMERO")) ? lexema : ""; // Se for número, armazena o valor
+            String token = classificarToken(lexema);
+            String valor = (token.equals("NUMERO")) ? lexema : "-"; 
 
             tabelaSimbolos.put(i, new Tokenizer(i, lexema, token, valor));
         }
@@ -50,34 +50,21 @@ public class Main {
         for (Map.Entry<Integer, Tokenizer> entry : tabelaSimbolos.entrySet()) {
             System.out.println(entry.getValue());
         }
-    }
 
+        System.out.println("\nCódigo Tokenizado:");
+        for (Map.Entry<Integer, Tokenizer> entry : tabelaSimbolos.entrySet()) {
+            System.out.print("<" + entry.getValue().getToken() + ", " + entry.getKey() + "> ");
+        }
+        System.out.println();
+    }
+    
+        
     // Método para identificar o tipo de token
-    private static String identificarToken(String lexema) {
-        if (lexema.matches("\\b(int|char|if)\\b")) return "PALAVRA_RESERVADA";
-        if (lexema.matches("\\d+")) return "NUMERO";
-        if (lexema.matches("[a-zA-Z_]\\w*")) return "IDENTIFICADOR";
-        if (lexema.matches("[=+\\-*/;(){}]")) return "OPERADOR";
-        return "DESCONHECIDO";
-    }
-}
-
-// Classe Tokenizer para representar um token
-class Tokenizer {
-    private int id;
-    private String lexema;
-    private String token;
-    private String valor;
-
-    public Tokenizer(int id, String lexema, String token, String valor) {
-        this.id = id;
-        this.lexema = lexema;
-        this.token = token;
-        this.valor = valor;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%-5d %-10s %-20s %-10s", id, lexema, token, valor);
+    private static String classificarToken(String lexema) {
+        if (lexema.matches("\\b(int|char|if)\\b")) return "KW_" + lexema.toUpperCase(); // PALAVRAS RESERVADAS
+        if (lexema.matches("[a-zA-Z_]\\w*")) return "ID"; // IDENTIFICADOR
+        if (lexema.matches("\\d+")) return "NUM"; // NÚMEROS
+        if (lexema.matches("[=+\\-*/;(){}]")) return "SYM"; // SÍMBOLOS
+        return "UNK"; // DESCONHECIDO
     }
 }
