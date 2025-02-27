@@ -14,7 +14,7 @@ public class Main {
         /* Eduardo Lima Pinheiro
          * Marielle Rodrigues Vaz */
 
-         
+
         String codigo = "";
         String caminho = JOptionPane.showInputDialog("Informe o caminho que está o seu código (Ex.: C:\\Users\\codigo.txt)");
 
@@ -56,13 +56,13 @@ public class Main {
 
         System.out.printf("%-5s %-10s %-20s %-10s%n", "ID", "Lexema", "Token", "Valor");
         System.out.println("------------------------------------------------------");
-        for (Tokenizer entry : tabelaSimbolos) {
-            System.out.println(entry);
+        for (Tokenizer item : tabelaSimbolos) {
+            System.out.println(item);
         }
 
         System.out.println("\nCódigo Tokenizado:");
-        for (Tokenizer entry : tabelaSimbolos) {
-            System.out.print("<" + entry.getToken() + ", " + entry.getId() + "> ");
+        for (Tokenizer item : tabelaSimbolos) {
+            System.out.print("<" + item.getToken() + ", " + item.getId() + "> ");
         }
         System.out.println();
     }
