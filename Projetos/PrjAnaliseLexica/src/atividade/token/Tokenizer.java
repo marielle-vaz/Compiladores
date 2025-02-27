@@ -2,10 +2,10 @@ package atividade.token;
 
 public class Tokenizer{
 
-    private int id;
-    private String lexema;
-    private String token;
-    private String valor;
+    private final int id;
+    private final String lexema;
+    private final String token;
+    private final String valor;
 
     public Tokenizer(int id, String lexema, String token, String valor) {
         this.id = id;

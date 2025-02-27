@@ -72,42 +72,18 @@ public class Main {
 
     private static String IdentificarOperadores(String operador){
 
-        if(operador.equals("=")){
-            return "SYM_EQUAL";
-        }
-        else if (operador.equals(";")) {
-            return "SYM_PV";
-        }
-        else if (operador.equals("(")) {
-            return "SYM_PAR_D";
-        }
-        else if (operador.equals(")")) {
-            return "SYM_PAR_E";
-        }
-        else if (operador.equals(">")) {
-            return "SYM_MAIOR";
-        }
-        else if (operador.equals("<")) {
-            return "SYM_MENOR";
-        }
-        else if (operador.equals("+")) {
-            return "SYM_MAIS";
-        }
-        else if (operador.equals("-")) {
-            return "SYM_MENOS";
-        }
-        else if (operador.equals("*")) {
-            return "SYM_MULTI";
-        }
-        else if (operador.equals("/")) {
-            return "SYM_DIV";
-        }
-        else if (operador.equals("{")){
-            return "SYM_CH_E";
-        }
-        else if (operador.equals("}")){
-            return "SYM_CH_D";
-        }
+        if(operador.equals("=")) return "SYM_EQUAL";
+        else if (operador.equals(";")) return "SYM_PV";
+        else if (operador.equals("(")) return "SYM_PAR_D";
+        else if (operador.equals(")")) return "SYM_PAR_E";
+        else if (operador.equals(">"))return "SYM_MAIOR";
+        else if (operador.equals("<"))return "SYM_MENOR";
+        else if (operador.equals("+"))return "SYM_MAIS";
+        else if (operador.equals("-"))return "SYM_MENOS";
+        else if (operador.equals("*"))return "SYM_MULTI";
+        else if (operador.equals("/"))return "SYM_DIV";
+        else if (operador.equals("{"))return "SYM_CH_E";
+        else if (operador.equals("}"))return "SYM_CH_D";
         return "";
     }
 }
