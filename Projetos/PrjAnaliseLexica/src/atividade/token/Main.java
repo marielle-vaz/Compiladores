@@ -23,7 +23,7 @@ public class Main {
         System.out.println("Código Fonte:\n" + codigo);
 
         // Expressão regular para capturar tokens
-        String regex = "\\b(int|char|if)\\b|\\w+|[=+\\-*/;(){}]";
+        String regex = "\\b(int|char|if)\\b|\\w+|[=+\\-*;/(){}<>]";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(codigo);
 
@@ -35,16 +35,22 @@ public class Main {
 
         // Criar tabela de símbolos
         Map<Integer, Tokenizer> tabelaSimbolos = new HashMap<>();
+        Set<String> lexemasExistentes = new HashSet<>(); // Conjunto para armazenar lexemas únicos
+
         try {
-            for (int i = 0; i < tokens.size(); i++) {
-                String lexema = tokens.get(i);
-                String token = classificarToken(lexema);
-                String valor = (token.equals("NUM")) ? lexema : "-"; 
-    
-                tabelaSimbolos.put(i + 1, new Tokenizer(i + 1, lexema, token, valor));
+            int id = 1; // ID sequencial para os tokens
+            for (String lexema : tokens) {
+                if (!lexemasExistentes.contains(lexema)) { // Se o lexema ainda não foi inserido
+                    String token = classificarToken(lexema);
+                    String valor = token.equals("NUM") ? lexema : "-";
+                    
+                    tabelaSimbolos.put(id, new Tokenizer(id, lexema, token, valor));
+                    lexemasExistentes.add(lexema); // Adiciona o lexema ao conjunto
+                    id++; // Incrementa o ID
+                }
             }
         } catch (Exception e) {
-
+            System.out.println(e.getMessage()); // Para capturar erros inesperados
         }
 
         // Exibir a tabela de símbolos formatada
@@ -66,7 +72,7 @@ public class Main {
         if (lexema.matches("\\b(int|char|if)\\b")) return "KW_" + lexema.toUpperCase(); // PALAVRAS RESERVADAS
         if (lexema.matches("[a-zA-Z_]\\w*")) return "ID"; // IDENTIFICADOR
         if (lexema.matches("\\d+")) return "NUM"; // NÚMEROS
-        if (lexema.matches("[=+\\-*/;(){}]")) return IdentificarOperadores(lexema); // SÍMBOLOS
+        if (lexema.matches("[=+\\-*;/(){}<>]")) return IdentificarOperadores(lexema); // SÍMBOLOS
         return "UNK"; // DESCONHECIDO
     }
 
