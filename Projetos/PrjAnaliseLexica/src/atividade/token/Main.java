@@ -22,68 +22,69 @@ public class Main {
 
         System.out.println("Código Fonte:\n" + codigo);
 
-        // Expressão regular para capturar tokens
-        String regex = "\\b(int|char|if)\\b|\\w+|[=+\\-*/;(){}]";
+        String regex = "\\b(int|char|if)\\b|\\w+|[=+\\-*<>/;(){}]";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(codigo);
 
         List<String> tokens = new ArrayList<>();
-
         while (matcher.find()) {
             tokens.add(matcher.group());
         }
 
-        // Criar tabela de símbolos
-        Map<Integer, Tokenizer> tabelaSimbolos = new HashMap<>();
-        try {
-            for (int i = 0; i < tokens.size(); i++) {
-                String lexema = tokens.get(i);
-                String token = classificarToken(lexema);
-                String valor = (token.equals("NUM")) ? lexema : "-"; 
-    
-                tabelaSimbolos.put(i + 1, new Tokenizer(i + 1, lexema, token, valor));
-            }
-        } catch (Exception e) {
+        List<Tokenizer> tabelaSimbolos = new ArrayList<>();
+        Map<String, Integer> idMap = new HashMap<>();
+        int idCounter = 1;
 
+        for (String lexema : tokens) {
+            int id;
+            if (idMap.containsKey(lexema)) {
+                id = idMap.get(lexema);
+            } else {
+                id = idCounter++;
+                idMap.put(lexema, id);
+            }
+
+            String token = classificarToken(lexema);
+            String valor = (token.equals("NUM")) ? lexema : "-";
+            tabelaSimbolos.add(new Tokenizer(id, lexema, token, valor));
         }
 
-        // Exibir a tabela de símbolos formatada
         System.out.printf("%-5s %-10s %-20s %-10s%n", "ID", "Lexema", "Token", "Valor");
         System.out.println("------------------------------------------------------");
-        for (Map.Entry<Integer, Tokenizer> entry : tabelaSimbolos.entrySet()) {
-            System.out.println(entry.getValue());
+        for (Tokenizer entry : tabelaSimbolos) {
+            System.out.println(entry);
         }
 
         System.out.println("\nCódigo Tokenizado:");
-        for (Map.Entry<Integer, Tokenizer> entry : tabelaSimbolos.entrySet()) {
-            System.out.print("<" + entry.getValue().getToken() + ", " + entry.getKey() + "> ");
+        for (Tokenizer entry : tabelaSimbolos) {
+            System.out.print("<" + entry.getToken() + ", " + entry.getId() + "> ");
         }
         System.out.println();
     }
-    
-        
+
     private static String classificarToken(String lexema) {
-        if (lexema.matches("\\b(int|char|if)\\b")) return "KW_" + lexema.toUpperCase(); // PALAVRAS RESERVADAS
-        if (lexema.matches("[a-zA-Z_]\\w*")) return "ID"; // IDENTIFICADOR
-        if (lexema.matches("\\d+")) return "NUM"; // NÚMEROS
-        if (lexema.matches("[=+\\-*/;(){}]")) return IdentificarOperadores(lexema); // SÍMBOLOS
-        return "UNK"; // DESCONHECIDO
+        if (lexema.matches("\\b(int|char|if)\\b")) return "KW_" + lexema.toUpperCase();
+        if (lexema.matches("[a-zA-Z_]\\w*")) return "ID";
+        if (lexema.matches("\\d+")) return "NUM";
+        if (lexema.matches("[=+\\-*<>/;(){}]")) return IdentificarOperadores(lexema);
+        return "UNK";
     }
 
-    private static String IdentificarOperadores(String operador){
-
-        if(operador.equals("=")) return "SYM_EQUAL";
-        else if (operador.equals(";")) return "SYM_PV";
-        else if (operador.equals("(")) return "SYM_PAR_D";
-        else if (operador.equals(")")) return "SYM_PAR_E";
-        else if (operador.equals(">"))return "SYM_MAIOR";
-        else if (operador.equals("<"))return "SYM_MENOR";
-        else if (operador.equals("+"))return "SYM_MAIS";
-        else if (operador.equals("-"))return "SYM_MENOS";
-        else if (operador.equals("*"))return "SYM_MULTI";
-        else if (operador.equals("/"))return "SYM_DIV";
-        else if (operador.equals("{"))return "SYM_CH_E";
-        else if (operador.equals("}"))return "SYM_CH_D";
-        return "";
+    private static String IdentificarOperadores(String operador) {
+        switch (operador) {
+            case "=": return "SYM_EQUAL";
+            case ";": return "SYM_PV";
+            case "(": return "SYM_PAR_D";
+            case ")": return "SYM_PAR_E";
+            case ">": return "SYM_MAIOR";
+            case "<": return "SYM_MENOR";
+            case "+": return "SYM_MAIS";
+            case "-": return "SYM_MENOS";
+            case "*": return "SYM_MULTI";
+            case "/": return "SYM_DIV";
+            case "{": return "SYM_CH_E";
+            case "}": return "SYM_CH_D";
+            default: return "";
+        }
     }
 }

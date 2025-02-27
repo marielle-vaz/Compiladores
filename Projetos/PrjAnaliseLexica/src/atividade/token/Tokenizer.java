@@ -20,6 +20,9 @@ public class Tokenizer{
     public String getToken() {
         return token;
     }
+    public int getId(){
+        return id;
+    }
 
     @Override
     public String toString() {
