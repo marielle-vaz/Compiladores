@@ -26,7 +26,7 @@ public class Main {
 
         System.out.println("Código Fonte:\n" + codigo);
 
-        String regex = "\"|'|\\b(int|char|if)\\b|\\w+|[=+\\-*<>/;(){}]";
+        String regex = "\"|'|\\b(int|char|if)\\b|\\w+|[=+\\-*<>/!;(){}]";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(codigo);
 
@@ -80,7 +80,7 @@ public class Main {
         if (lexema.matches("\\b(int|char|if)\\b")) return "KW_" + lexema.toUpperCase();
         if (lexema.matches("[a-zA-Z_]\\w*")) return "ID";
         if (lexema.matches("\\d+")) return "NUM";
-        if (lexema.matches("[=+\\-*<>/;(){}]")) return IdentificarOperadores(lexema);
+        if (lexema.matches("[=+\\-*<>/;!(){}]")) return IdentificarOperadores(lexema);
         return "UNK";
     }
 
@@ -98,6 +98,7 @@ public class Main {
             case "/": return "SYM_DIV";
             case "{": return "SYM_CH_E";
             case "}": return "SYM_CH_D";
+            case "!": return "SYM_EX";
             default: return "";
         }
     }
