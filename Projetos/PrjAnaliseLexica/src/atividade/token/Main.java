@@ -35,13 +35,16 @@ public class Main {
 
         // Criar tabela de símbolos
         Map<Integer, Tokenizer> tabelaSimbolos = new HashMap<>();
+        try {
+            for (int i = 0; i < tokens.size(); i++) {
+                String lexema = tokens.get(i);
+                String token = classificarToken(lexema);
+                String valor = (token.equals("NUM")) ? lexema : "-"; 
+    
+                tabelaSimbolos.put(i + 1, new Tokenizer(i + 1, lexema, token, valor));
+            }
+        } catch (Exception e) {
 
-        for (int i = 0; i < tokens.size(); i++) {
-            String lexema = tokens.get(i);
-            String token = classificarToken(lexema);
-            String valor = (token.equals("NUM")) ? lexema : "-"; 
-
-            tabelaSimbolos.put(i + 1, new Tokenizer(i + 1, lexema, token, valor));
         }
 
         // Exibir a tabela de símbolos formatada
