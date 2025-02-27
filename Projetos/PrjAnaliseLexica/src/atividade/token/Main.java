@@ -39,9 +39,9 @@ public class Main {
         for (int i = 0; i < tokens.size(); i++) {
             String lexema = tokens.get(i);
             String token = classificarToken(lexema);
-            String valor = (token.equals("NUMERO")) ? lexema : "-"; 
+            String valor = (token.equals("NUM")) ? lexema : "-"; 
 
-            tabelaSimbolos.put(i, new Tokenizer(i, lexema, token, valor));
+            tabelaSimbolos.put(i + 1, new Tokenizer(i + 1, lexema, token, valor));
         }
 
         // Exibir a tabela de símbolos formatada
@@ -59,12 +59,52 @@ public class Main {
     }
     
         
-    // Método para identificar o tipo de token
     private static String classificarToken(String lexema) {
         if (lexema.matches("\\b(int|char|if)\\b")) return "KW_" + lexema.toUpperCase(); // PALAVRAS RESERVADAS
         if (lexema.matches("[a-zA-Z_]\\w*")) return "ID"; // IDENTIFICADOR
         if (lexema.matches("\\d+")) return "NUM"; // NÚMEROS
-        if (lexema.matches("[=+\\-*/;(){}]")) return "SYM"; // SÍMBOLOS
+        if (lexema.matches("[=+\\-*/;(){}]")) return IdentificarOperadores(lexema); // SÍMBOLOS
         return "UNK"; // DESCONHECIDO
+    }
+
+    private static String IdentificarOperadores(String operador){
+
+        if(operador.equals("=")){
+            return "SYM_EQUAL";
+        }
+        else if (operador.equals(";")) {
+            return "SYM_PV";
+        }
+        else if (operador.equals("(")) {
+            return "SYM_PAR_D";
+        }
+        else if (operador.equals(")")) {
+            return "SYM_PAR_E";
+        }
+        else if (operador.equals(">")) {
+            return "SYM_MAIOR";
+        }
+        else if (operador.equals("<")) {
+            return "SYM_MENOR";
+        }
+        else if (operador.equals("+")) {
+            return "SYM_MAIS";
+        }
+        else if (operador.equals("-")) {
+            return "SYM_MENOS";
+        }
+        else if (operador.equals("*")) {
+            return "SYM_MULTI";
+        }
+        else if (operador.equals("/")) {
+            return "SYM_DIV";
+        }
+        else if (operador.equals("{")){
+            return "SYM_CH_E";
+        }
+        else if (operador.equals("}")){
+            return "SYM_CH_D";
+        }
+        return "";
     }
 }
