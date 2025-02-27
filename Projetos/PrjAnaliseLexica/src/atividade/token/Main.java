@@ -10,6 +10,11 @@ import javax.swing.JOptionPane;
 
 public class Main {
     public static void main(String[] args) {
+
+        /* Eduardo Lima Pinheiro
+         * Marielle Rodrigues Vaz 
+        */
+
         String codigo = "";
         String caminho = JOptionPane.showInputDialog("Informe o caminho que está o seu código (Ex.: C:\\Users\\codigo.txt)");
 
