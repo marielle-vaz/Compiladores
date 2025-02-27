@@ -14,7 +14,6 @@ public class Main {
         /* Eduardo Lima Pinheiro
          * Marielle Rodrigues Vaz */
 
-
         String codigo = "";
         String caminho = JOptionPane.showInputDialog("Informe o caminho que está o seu código (Ex.: C:\\Users\\codigo.txt)");
 
@@ -27,7 +26,7 @@ public class Main {
 
         System.out.println("Código Fonte:\n" + codigo);
 
-        String regex = "\\b(int|char|if)\\b|\\w+|[=+\\-*<>/;(){}]";
+        String regex = "\"|'|\\b(int|char|if)\\b|\\w+|[=+\\-*<>/;(){}]";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(codigo);
 
@@ -50,7 +49,13 @@ public class Main {
             }
 
             String token = classificarToken(lexema);
-            String valor = (token.equals("NUM")) ? lexema : "-";
+            String valor = "-";
+            if (token.equals("NUM")) {
+                valor = lexema;
+            } else if (token.equals("STR") || token.equals("CHAR")) {
+                valor = lexema.length() > 1 ? lexema.substring(1, lexema.length() - 1) : lexema;
+            }
+
             tabelaSimbolos.add(new Tokenizer(id, lexema, token, valor));
         }
 
@@ -68,6 +73,10 @@ public class Main {
     }
 
     private static String classificarToken(String lexema) {
+        if (lexema.equals("\"")) return "SYM_ASPAS_DUPLAS"; 
+        if (lexema.equals("'")) return "SYM_ASPAS_SIMPLES"; 
+        if (lexema.matches("\"[^\"]*\"")) return "STR";  
+        if (lexema.matches("'[^']'")) return "CHAR";          
         if (lexema.matches("\\b(int|char|if)\\b")) return "KW_" + lexema.toUpperCase();
         if (lexema.matches("[a-zA-Z_]\\w*")) return "ID";
         if (lexema.matches("\\d+")) return "NUM";
