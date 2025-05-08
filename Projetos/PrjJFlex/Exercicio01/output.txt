@@ -1,11 +1,11 @@
 ID              | TOKEN      | LEXEMA
 -----------------------------------------------------
-GRERLAFSUC      | KW_ATT     | =
-ZGAYV0XNUY      | KW_OP      | +
-9ZUR9DWAH2      | KW_ID      | y
-7FCN5QIAUH      | KW_ID      | a
-F20ERCU0JC      | KW_NUMBER  | 2
-PJ94N6YKTX      | KW_OP      | /
-YYEAV19OXD      | KW_ID      | x
-SK2YDFC9EX      | KW_ID      | b
-KVSPDAMY9Q      | KW_ID      | c
+5TGTC45R08      | KW_ATT     | =
+VBBX6KEPCJ      | KW_ID      | c
+FXHYCBI20W      | KW_OP      | /
+GT21OOTH9F      | KW_ID      | a
+UOM172C58A      | KW_OP      | +
+P6LH14IM7X      | KW_NUMBER  | 2
+GFL2LZ07WR      | KW_ID      | b
+I6P429Y6NF      | KW_ID      | x
+PW2KVRR8KL      | KW_ID      | y
