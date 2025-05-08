@@ -1,6 +1,2 @@
-quantidade
-quant_max
-max87
-45trindade
-_nome
-666
+x = a + b + c
+y = x / 2

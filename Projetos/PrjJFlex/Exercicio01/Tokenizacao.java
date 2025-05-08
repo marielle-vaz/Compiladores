@@ -10,8 +10,16 @@ public class Tokenizacao {
     }
 
     public void add(String token, String lexema) {
-        Token t = new Token(token, lexema);
-        this.tableSymbol.put(t.getId(), t);
+        for (Token t : tableSymbol.values()) {
+            if (t.getLexema().equals(lexema)) {
+                return; // Lexema já existe, não adiciona
+            }
+        }
+
+        if (!tableSymbol.containsKey(token)) {
+            Token t = new Token(token, lexema);
+            this.tableSymbol.put(t.getId(), t);
+        }
     }
 
     public void print() {
