@@ -1,0 +1,9 @@
+ID              | TOKEN      | LEXEMA
+-----------------------------------------------------
+ERN3JB8IOF      | KW_ID      | quant_max
+KZXOEE0C1G      | KW_NUMBER  | 45
+R6AZAIFGMK      | KW_ID      | trindade
+LNZWO1Y53V      | KW_NUMBER  | 666
+6TU3PDMYK0      | KW_ID      | max87
+RJASSMTRYT      | KW_ID      | _nome
+GNZIN5AUIY      | KW_ID      | quantidade
